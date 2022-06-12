@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { InputGroup, DropdownButton, Dropdown, Form, Button } from 'react-bootstrap'
 
-function InputSearch() {
+function InputSearch(props) {
 
 	const [IV, setIV] = useState('')
 
 	const changeIV = (e) => {
 		setIV(e.target.value)
+		props.setIV(e.target.value)
 	}
 
-	const pasteToInput = (text) => setIV(text)
+	const pasteToInput = (text) => { setIV(text); props.setIV(text) }
 
 	const search = async () => {}
 
@@ -32,7 +33,6 @@ function InputSearch() {
 				))}
 			</DropdownButton>
 			<Form.Control value={IV} onChange={changeIV} placeholder='Можете попробовать найти' aria-label="Text input with dropdown button" />
-			<Button variant='success'>Найти</Button>
 		</InputGroup>
 	)
 }

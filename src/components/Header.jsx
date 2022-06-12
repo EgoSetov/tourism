@@ -31,8 +31,8 @@ const Header = () => {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
 						{links.map(link => (
-							<Nav.Link>
-								<Link style={{ color: "grey", textDecoration: "none" }} key={link.to} to={link.to}>
+							<Nav.Link key={link.to}>
+								<Link style={{ color: "grey", textDecoration: "none" }} to={link.to}>
 									{link.title}
 								</Link>
 							</Nav.Link>

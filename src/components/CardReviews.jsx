@@ -3,16 +3,16 @@ import { Card } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
 
 const CardReviews = (props) => {
-	const { personName, city, hotelName, text } = props.info
+	const { name, city, hotel, text } = props.info
 
 	return (
 		<Card style={{ width: '100%' }}>
 			<Card.Header>
-				<Card.Text>{personName}</Card.Text>
+				<Card.Text>{name}</Card.Text>
 			</Card.Header>
 			<Card.Body>
 				<Card.Title>{city}</Card.Title>
-				<Card.Subtitle className="mb-2 text-muted">{hotelName}</Card.Subtitle>
+				<Card.Subtitle className="mb-2 text-muted">{hotel}</Card.Subtitle>
 				<Card.Text>{text}</Card.Text>
 			</Card.Body>
 		</Card>

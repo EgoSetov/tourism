@@ -8,3 +8,10 @@
 	display: flex;
 	gap: 30px;
 }
+
+
+.reviews, .popular{
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}

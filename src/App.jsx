@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Payment from './pages/Payment';
 import Contacts from './pages/Contacts';
 import Reviews from './pages/Reviews';
+import { NotificationContainer } from 'react-notifications';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
 				  <Route path="/reviews" element={<Reviews />} />
 			  </Routes>
 		  </Container>
+		  <NotificationContainer />
 	  </>
   );
 }
