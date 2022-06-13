@@ -1,6 +1,6 @@
 export const getCurrentPrice = (priceObj) => {
 	const month = new Date().getMonth() + 1
-	console.log(month);
+	
 	switch (month) {
 		case 6:
 		case 7:

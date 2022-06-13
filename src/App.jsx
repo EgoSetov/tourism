@@ -8,22 +8,26 @@ import Payment from './pages/Payment';
 import Contacts from './pages/Contacts';
 import Reviews from './pages/Reviews';
 import { NotificationContainer } from 'react-notifications';
+import Footer from './components/Footer';
 
 function App() {
   return (
-	  <>
-		  <Header />
-		  <Container style={{marginTop: "50px"}}>
-			  <Routes>
-				  <Route path="/" element={<Home />} />
-				  <Route path="/regions" element={<Regions />} />
-				  <Route path="/payment" element={<Payment />} />
-				  <Route path="/contacts" element={<Contacts />} />
-				  <Route path="/reviews" element={<Reviews />} />
-			  </Routes>
-		  </Container>
+	  <div id="container">
+		  <div>
+			  <Header />
+			  <Container style={{ marginTop: "50px" }}>
+				  <Routes>
+					  <Route path="/" element={<Home />} />
+					  <Route path="/regions" element={<Regions />} />
+					  <Route path="/payment" element={<Payment />} />
+					  <Route path="/contacts" element={<Contacts />} />
+					  <Route path="/reviews" element={<Reviews />} />
+				  </Routes>
+			  </Container>
+		  </div>
+		  <Footer />
 		  <NotificationContainer />
-	  </>
+	  </div>
   );
 }
 

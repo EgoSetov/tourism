@@ -12,6 +12,7 @@ const Reviews = () => {
 		city: '',
 		hotel: ''
 	})
+	
 	const [reviews, setReviews] = useState([])
 
 

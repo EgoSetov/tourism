@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { addCity, addHotel, getCitys } from '../api/events'
+import {getCitys } from '../api/events'
 import CardsTour from '../components/CardsTour'
 import InputSearch from '../components/InputSearch'
 import Spinner from '../components/Spinner'
-import Image from 'react-bootstrap/Image'
 
 const Home = () => {
 
+	// Состояния
 	const [IV, setIV] = useState('')
 	const [citys, setCitys] = useState([])
 	const [loading, setloading] = useState(false)
+
+	// Фильтрация массива по значению в IV
 	const searchFilter = citys.filter(city => city.city.toLowerCase().includes(IV.toLowerCase()))
 
+	// Получение всех регионов из БД при готовности приложения рендерица
 	useEffect(() => {
 		(async () => {
 			setloading(true)
@@ -23,6 +26,7 @@ const Home = () => {
 		})()
 	}, [])
 
+	// Разметка
 	return (
 		<>
 			<div className="titleImage"></div>
