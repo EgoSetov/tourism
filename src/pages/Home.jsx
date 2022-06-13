@@ -3,13 +3,14 @@ import { addCity, addHotel, getCitys } from '../api/events'
 import CardsTour from '../components/CardsTour'
 import InputSearch from '../components/InputSearch'
 import Spinner from '../components/Spinner'
+import Image from 'react-bootstrap/Image'
 
 const Home = () => {
 
 	const [IV, setIV] = useState('')
 	const [citys, setCitys] = useState([])
 	const [loading, setloading] = useState(false)
-	const searchFilter = citys.filter(city => city.city.toLowerCase().includes(IV.toLowerCase())) 
+	const searchFilter = citys.filter(city => city.city.toLowerCase().includes(IV.toLowerCase()))
 
 	useEffect(() => {
 		(async () => {
@@ -24,6 +25,7 @@ const Home = () => {
 
 	return (
 		<>
+			<div className="titleImage"></div>
 			<InputSearch IV={IV} setIV={setIV} />
 			<hr />
 			<h1>Вам может понравится</h1>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Nav } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
+import { getCurrentPrice } from '../assets/getCurrentPrice'
 
 function CardsTour(props) {
 	const { name, rating, desc, urlImage, price } = props.info
@@ -33,7 +34,7 @@ function CardsTour(props) {
 			}
 			<Card.Footer>
 				<Card.Text>
-					ОТ {price} РУБ.
+					ОТ {getCurrentPrice(price)} РУБ.
 				</Card.Text>
 			</Card.Footer>
 		</Card>

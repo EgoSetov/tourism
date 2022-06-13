@@ -6,6 +6,7 @@
 
 .regions{
 	display: flex;
+	flex-wrap: wrap;
 	gap: 30px;
 }
 
@@ -14,4 +15,25 @@
 	display: flex;
 	flex-direction: column;
 	gap: 30px;
+}
+
+.titleImage{
+	position: relative;
+	background-image: url('https://c.wallhere.com/photos/e6/5d/hotel-186676.jpg!d');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 400px;
+	margin-bottom: 30px;
+	filter: brightness(40%);
+}
+
+.titleImage img {
+	width: 100%;
+}
+
+@media (max-width:525px) {
+	.navbar .container{
+		flex-direction: column;
+	}
 }
