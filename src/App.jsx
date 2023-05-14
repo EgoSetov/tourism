@@ -19,6 +19,8 @@ import ModalComments from "./components/modals/ModalComments";
 import ModalCreateCity from "./components/modals/ModalCreateCity";
 import ModalCreateHotel from "./components/modals/ModalCreateHotel";
 import ModalCreateQuestion from "./components/modals/ModalCreateQuestion";
+import Profile from "./pages/Profile";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,11 +50,24 @@ function App() {
             <Route path="/payment" element={<Payment />} />
             {/* <Route path="/contacts" element={<Contacts />} /> */}
             <Route path="/reviews" element={<Reviews />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/admin" element={<Profile />} />
           </Routes>
         </Container>
       </div>
       <Footer />
-      <NotificationContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
       {/* modals */}
       {modals.signin.visible && <ModalLogin />}

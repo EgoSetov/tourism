@@ -149,7 +149,6 @@ const userSlice = createSlice({
       toast.success("Пользователь успешно удален");
     },
     [asyncDeleteUser.rejected]: (_, { payload }) => {
-      console.log(payload);
       toast.error(`Не удалось удалить пользователя ${payload?.response?.data?.message || ""}`);
     },
   },
