@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
-import { addApplications } from '../api/events'
 
 const FormFeedback = (props) => {
 
@@ -19,17 +18,17 @@ const FormFeedback = (props) => {
 	}
 
 	const orderCall = async () => {
-		if (!IV.name && !IV.email) return NotificationManager.error('Необходимо заполнить все поля со звездочкой')
+		// if (!IV.name && !IV.email) return NotificationManager.error('Необходимо заполнить все поля со звездочкой')
 
-		const res = await addApplications(IV)
-		if (res?.status === 'ADDED') {
-			NotificationManager.success('Заявка успешно отправлена!')
-			setIV({
-				name: '',
-				email: '',
-				msg: ''
-			})
-		}
+		// const res = await addApplications(IV)
+		// if (res?.status === 'ADDED') {
+		// 	NotificationManager.success('Заявка успешно отправлена!')
+		// 	setIV({
+		// 		name: '',
+		// 		email: '',
+		// 		msg: ''
+		// 	})
+		// }
 	}
 
 	return (

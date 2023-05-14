@@ -1,66 +1,133 @@
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.regions{
-	display: flex;
-	flex-wrap: wrap;
-	gap: 30px;
+.regions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
-.reviews, .popular{
-	display: flex;
-	flex-direction: column;
-	gap: 30px;
+.reviews,
+.popular {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-.titleImage{
-	position: relative;
-	background-image: url('https://c.wallhere.com/photos/e6/5d/hotel-186676.jpg!d');
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 400px;
-	margin-bottom: 30px;
-	filter: brightness(40%);
+.titleImage {
+  position: relative;
+  background-image: url("https://c.wallhere.com/photos/e6/5d/hotel-186676.jpg!d");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  margin-bottom: 30px;
+  filter: brightness(40%);
 }
 
 .titleImage img {
-	width: 100%;
+  width: 100%;
 }
 
-#container{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	gap: 30px;
-	height: 100%;
-	min-height: 100vh;
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+  height: 100%;
+  min-height: 100vh;
 }
 
-.footer{
-	height: 150px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 50px;
+.footer {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 }
 
-.footer .footer-item{
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	text-align: center;
+.footer .footer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
 }
 
-.navbar-brand img{
-	max-width: 50px;
+.navbar-brand img {
+  max-width: 50px;
 }
 
-@media (max-width:525px) {
-	.navbar .container{
-		flex-direction: column;
-	}
+.loadin {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 72px;
+  z-index: 10;
+}
+
+.card {
+  width: 100%;
+}
+
+.card-image {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+}
+
+.photos-list-item {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.photos-list-item-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  bottom: 0px;
+  right: 0px;
+  background-color: rgba(247, 59, 59, 0.707);
+  border-radius: 5px 5px 0 5px;
+  cursor: pointer;
+}
+
+.photos-list-item-photo {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.show-hotel {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.show-hotel:hover {
+	-webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.08);
+	-moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.08);
+	box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.08);
+}
+
+.rotate-180{
+  transform: rotate(180deg);
+  justify-content: spa;
+}
+
+@media (max-width: 525px) {
+  .navbar .container {
+    flex-direction: column;
+  }
 }

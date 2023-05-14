@@ -1,40 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import { getCitys } from '../api/events'
-import CardsRegion from '../components/CardsRegion'
-import Spinner from '../components/Spinner'
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import CardCity from "../components/CardCuty";
+import CardsRegion from "../components/CardsRegion";
+import Spinner from "../components/Spinner";
+import { asyncGetCitys } from "../store/slices/citysSlice";
+import { showModal } from "../store/slices/modalsSlice";
 
 const Regions = () => {
+  const dispatch = useDispatch();
+  const { citys } = useSelector((state) => state.citys);
+  const { isAuth, user } = useSelector((state) => state.user);
 
-	const [citys, setCitys] = useState([])
-	const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
 
-	useEffect(() => {
-		(async () => {
-			setloading(true)
-			const res = await getCitys()
-			if (res?.status === 'SUCCESS') {
-				setCitys(res.items)
-			}
-			setloading(false)
-		})()
-	}, [])
+  const getCitys = async () => {
+    setloading(true);
+    await dispatch(asyncGetCitys());
+    setloading(false);
+  };
 
-	return (
-		<>
-			<h1>Доступные регионы</h1>
-			<hr />
-			{citys.length ?
-				<div className="regions">
-					{citys.map(region => (
-						<CardsRegion key={region.id} info={region} />
-					))}
-				</div>
-				:
-				''
-		}
-			{loading ? <Spinner /> : ''}
-		</>
-	)
-}
+  useEffect(() => {
+    getCitys();
+  }, []);
 
-export default Regions
+  return (
+    <>
+      <div className="d-flex align-items-center gap-3">
+        <h1>Доступные регионы</h1>
+        {isAuth && user?.type === "admin" && (
+          <Button
+            onClick={() => {
+              dispatch(showModal({ modal: "createCity", visible: true }));
+            }}
+            variant="success"
+          >
+            Создать
+          </Button>
+        )}
+      </div>
+      <hr />
+      {!!citys.length &&
+        !loading &&
+        citys.map((city) => (
+          <>
+            <CardCity key={city.id} city={city} getCitys={getCitys} />
+          </>
+        ))}
+      {loading && <Spinner />}
+    </>
+  );
+};
+
+export default Regions;

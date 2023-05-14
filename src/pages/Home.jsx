@@ -1,60 +1,67 @@
-import React, { useEffect, useState } from 'react'
-import {getCitys } from '../api/events'
-import CardsTour from '../components/CardsTour'
-import InputSearch from '../components/InputSearch'
-import Spinner from '../components/Spinner'
+import React, { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import CardCity from "../components/CardCuty";
+import InputSearch from "../components/InputSearch";
+import Spinner from "../components/Spinner";
+import { asyncGetRecommendationCitys } from "../store/slices/citysSlice";
+import { showModal } from "../store/slices/modalsSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { recommendationCitys: recommendationCitysState } = useSelector((state) => state.citys);
+  const { isAuth, user } = useSelector((state) => state.user);
 
-	// Состояния
-	const [IV, setIV] = useState('')
-	const [citys, setCitys] = useState([])
-	const [loading, setloading] = useState(false)
+  const [IV, setIV] = useState("");
+  const [loading, setloading] = useState(false);
 
-	// Фильтрация массива по значению в IV
-	const searchFilter = citys.filter(city => city.city.toLowerCase().includes(IV.toLowerCase()))
+  const getCitys = async () => {
+    setloading(true);
+    await dispatch(asyncGetRecommendationCitys());
+    setloading(false);
+  };
 
-	// Получение всех регионов из БД при готовности приложения рендерица
-	useEffect(() => {
-		(async () => {
-			setloading(true)
-			const res = await getCitys()
-			if (res?.status === 'SUCCESS') {
-				setCitys(res.items)
-			}
-			setloading(false)
-		})()
-	}, [])
+  const recommendationCitys = useMemo(() => {
+    return recommendationCitysState.filter((city) => city.city.toLowerCase().includes(IV.trim().toLowerCase()));
+  }, [recommendationCitysState, IV]);
 
-	// Разметка
-	return (
-		<>
-			<div className="titleImage"></div>
-			<InputSearch IV={IV} setIV={setIV} />
-			<hr />
-			<h1>Вам может понравится</h1>
-			{(searchFilter.length && !loading) ?
-				searchFilter.map(tour => (
-					<>
-						<h3>{tour.city}</h3>
-						<br />
-						<div className="popular">
-							{
-								tour.hotels.map(hotel => (
-									<CardsTour key={hotel.id} info={hotel} />
-								))
-							}
-							<hr />
-						</div>
-					</>
-				))
-				:
-				''
-			}
-			{loading ? <Spinner /> : ''}
+  const popularPlaces = useMemo(() => {
+    return recommendationCitysState.map((city) => ({ text: city.city }));
+  }, [recommendationCitysState]);
 
-		</>
-	)
-}
+  useEffect(() => {
+    getCitys();
+  }, []);
 
-export default Home
+  return (
+    <>
+      {/* <div className="titleImage"></div> */}
+      <InputSearch IV={IV} setIV={setIV} popularPlaces={popularPlaces} />
+      <hr />
+      <div className="d-flex align-items-center gap-3">
+        <h1>Вам может понравится</h1>
+        {isAuth && user?.type === "admin" && (
+          <Button
+            onClick={() => {
+              dispatch(showModal({ modal: "createCity", visible: true }));
+            }}
+            variant="success"
+          >
+            Создать
+          </Button>
+        )}
+      </div>
+      {!!recommendationCitys.length &&
+        !loading &&
+        recommendationCitys.map((city) => (
+          <>
+            <CardCity key={city.id} city={city} getCitys={getCitys} />
+          </>
+        ))}
+      {loading && <Spinner />}
+    </>
+  );
+};
+
+export default Home;

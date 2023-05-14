@@ -1,89 +1,88 @@
-import React, { useEffect, useState } from 'react'
-import CardReviews from '../components/CardReviews'
-import { Form, Button } from 'react-bootstrap'
-import { addReview, getReview } from '../api/events'
-import { NotificationManager } from 'react-notifications'
+import React, { useEffect, useState } from "react";
+import { Button, Card, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { showModal } from "../store/slices/modalsSlice";
+import { asyncDeleteQuestion, asyncGetQuestions } from "../store/slices/questionsSlice";
 
 const Reviews = () => {
+  const dispatch = useDispatch();
+  const { questions } = useSelector((state) => state.questions);
+  const { isAuth, user } = useSelector((state) => state.user);
 
-	const [IV, setIV] = useState({
-		text: '',
-		name: '',
-		city: '',
-		hotel: ''
-	})
-	
-	const [reviews, setReviews] = useState([])
+  const [loading, setloading] = useState(false);
 
+  const getQuestions = async () => {
+    setloading(true);
+    await dispatch(asyncGetQuestions());
+    setloading(false);
+  };
 
-	const changeIV = (e) => {
-		setIV(prev => ({
-			...prev,
-			[e.target.name]: e.target.value
-		}))
-	}
+  const editQuestion = (data) => dispatch(showModal({ modal: "editQuestion", visible: true, data }));
 
-	useEffect(() => {
-		(async () => {
-			const res = await getReview()
-			if (res?.status === 'SUCCESS') {
-				setReviews(res.items)
-			}
-		})()
-	}, [])
+  const deleteQuestion = async (id) => {
+    await dispatch(asyncDeleteQuestion(id));
+    getQuestions();
+  };
 
-	const leaveReview = async () => {
-		console.log(IV);
-		if (!IV.name && !IV.text && !IV.city && !IV.hotel) return NotificationManager.error('Необходимо заполнить все поля со звездочкой')
-		const res = await addReview(IV)
-		if (res?.status === 'ADDED') {
-			NotificationManager.success('Отзыв успешно добавлен!')
-			setReviews(prev => ([
-				...prev,
-				res.item
-			]))
-			setIV({
-				text: '',
-				name: '',
-				city: '',
-				hotel: ''
-			})
-		}
-	}
+  useEffect(() => {
+    getQuestions();
+  }, []);
 
-	return (
-		<>
-			<h1>Отзывы</h1>
-			<hr />
-			<div className="reviews">
-				{reviews.length ?
-					reviews.map(review => (<CardReviews info={review} />))
-					: 'Отзывов пока что нет'}
-			</div>
+  return (
+    <>
+      <div className="d-flex align-items-center gap-3">
+        <h1>Ваши вопросы</h1>
+        {isAuth && (
+          <Button
+            onClick={() => {
+              dispatch(showModal({ modal: "createQuestion", visible: true }));
+            }}
+            variant="success"
+          >
+            Задать
+          </Button>
+        )}
+      </div>
+      <hr />
+      {loading && <Spinner />}
+      <div className="d-flex flex-column gap-2">
+        {questions.map((question) => (
+          <Card key={question.id}>
+            <Card.Header className="d-flex justify-content-between">
+              <span>
+                Автор: {question.creator?.surname} {question.creator?.name}
+              </span>
+              <span>
+                Статус:{" "}
+                {question.status === "pending" ? (
+                  <span className="text-secondary">Ожидает ответа</span>
+                ) : (
+                  <span className="text-success">Отвечен</span>
+                )}
+              </span>
+            </Card.Header>
+            <Card.Body>
+              <Card.Title>Тема: {question.title}</Card.Title>
+              {question.description && <Card.Text>Описание: {question.description}</Card.Text>}
+              {question.answer && <Card.Text>Ответ: {question.answer}</Card.Text>}
+              <div className="d-flex gap-2">
+                {isAuth && user?.type === "admin" && (
+                  <Button onClick={() => editQuestion(question)} variant="primary">
+                    {question.answer ? "Изменить" : "Дать"} ответ
+                  </Button>
+                )}
+                {isAuth && (user?.type === "admin" || user.id === question.creator?.id) && (
+                  <Button onClick={() => deleteQuestion(question.id)} variant="danger">
+                    Удалить
+                  </Button>
+                )}
+              </div>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
+    </>
+  );
+};
 
-			<hr />
-			<h5>Написать отзыв</h5>
-			<Form>
-				<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-					<Form.Label>Введите имя*</Form.Label>
-					<Form.Control reqiured onChange={changeIV} name="name" value={IV.name} type="text" placeholder="Имя:" />
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-					<Form.Label>Город*</Form.Label>
-					<Form.Control reqiured onChange={changeIV} name="city" value={IV.city} type="text" placeholder="Город:" />
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-					<Form.Label>Отель*</Form.Label>
-					<Form.Control reqiured onChange={changeIV} name="hotel" value={IV.hotel} type="text" placeholder="Отель:" />
-				</Form.Group>
-				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-					<Form.Label>Введите сообщение*</Form.Label>
-					<Form.Control reqiured onChange={changeIV} name="text" value={IV.text} as="textarea" placeholder='Все понравилось!' rows={3} />
-				</Form.Group>
-				<Button onClick={leaveReview} variant='success'>Отправить</Button>
-			</Form>
-		</>
-	)
-}
-
-export default Reviews
+export default Reviews;
