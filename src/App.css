@@ -4,37 +4,21 @@
   box-sizing: border-box;
 }
 
-.regions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+
+
+#container{
+  margin: 50px 0;
 }
 
-.reviews,
-.popular {
+.content{
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  justify-content: space-between;
+  height: calc(100vh - 70px)
 }
-
-.titleImage {
-  position: relative;
-  background-image: url("https://c.wallhere.com/photos/e6/5d/hotel-186676.jpg!d");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 400px;
-  margin-bottom: 30px;
-  filter: brightness(40%);
-}
-
-.titleImage img {
-  width: 100%;
-}
-
 
 .footer {
-  height: 150px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +28,7 @@
 .footer .footer-item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   text-align: center;
 }
 
@@ -104,8 +88,6 @@
 
 .show-hotel {
   cursor: pointer;
-  transition: all 0.2s;
-  
 }
 
 .show-hotel:hover {
@@ -113,7 +95,6 @@
 	-moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.08);
 	box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.08);
 }
-
 
 .rotate-180{
   transform: rotate(180deg);
@@ -128,24 +109,11 @@
   background-size: cover;
 }
 
-.footer{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-}
 
-.news{
+.cards{
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-y: scroll;
-  height: calc(100vh - 380px);
-}
-
-.payment, .profile{
-  padding: 5px;
-  overflow-y: scroll;
-  height: calc(100vh - 280px);
 }
 
 

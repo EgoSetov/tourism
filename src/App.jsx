@@ -40,23 +40,26 @@ function App() {
     }
   }, []);
   return (
-    <div>
+    <>
       <Header />
-      <div id="container">
-        <Container style={{ marginTop: "50px", maxHeight: "500px" }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/regions" element={<Regions />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/admin" element={<Profile />} />
-            {/* <Route path="/contacts" element={<Contacts />} /> */}
-          </Routes>
-        </Container>
+      <div className="content">
+        <div id="container">
+          <Container>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/regions" element={<Regions />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/admin" element={<Profile />} />
+              {/* <Route path="/contacts" element={<Contacts />} /> */}
+            </Routes>
+          </Container>
+        </div>
+        <Footer />
       </div>
-      <Footer />
+
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
@@ -94,7 +97,7 @@ function App() {
           </Spinner>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

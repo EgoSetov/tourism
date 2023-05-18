@@ -54,7 +54,7 @@ const Reviews = () => {
       </div>
       <hr />
       {loading && <Spinner />}
-      <div className="news">
+      <div className="cards">
         {questions.map((question) => (
           <Card key={question.id}>
             <Card.Header className="d-flex justify-content-between">

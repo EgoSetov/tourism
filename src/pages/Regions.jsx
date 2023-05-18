@@ -41,7 +41,7 @@ const Regions = () => {
       </div>
       <hr />
       {loading && <Spinner />}
-      <div className="news">
+      <div className="cards">
         {!!citys.length &&
           !loading &&
           citys.map((city) => (

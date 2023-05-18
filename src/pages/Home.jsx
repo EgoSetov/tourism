@@ -53,7 +53,7 @@ const Home = () => {
         )}
       </div>
       {loading && <Spinner />}
-      <div className="news">
+      <div className="cards">
         {!!recommendationCitys.length &&
           !loading &&
           recommendationCitys.map((city) => (

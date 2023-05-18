@@ -48,7 +48,7 @@ const News = () => {
         </div>
         <hr />
         {loading && <Spinner />}
-        <div className="news">
+        <div className="cards">
           {newsList.map((n) => (
             <CardNews post={n} getNews={getNews} />
           ))}
