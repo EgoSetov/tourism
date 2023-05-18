@@ -116,7 +116,7 @@ const Profile = () => {
   }, [user]);
 
   return (
-    <Container className="pt-5">
+    <Container className="profile">
       {!!user && user.type === "admin" && (
         <>
           {isAdminPanel() ? (
@@ -135,7 +135,7 @@ const Profile = () => {
           {isAdminPanel() ? (
             <UserList />
           ) : (
-            <Form onSubmit={onSubmit} className="profile">
+            <Form onSubmit={onSubmit}>
               <Col xs={4} md={2}>
                 <Image width={300} src={getAvatar()} rounded />
               </Col>
