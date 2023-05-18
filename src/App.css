@@ -32,14 +32,6 @@
   width: 100%;
 }
 
-#container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 30px;
-  height: 100%;
-  min-height: 100vh;
-}
 
 .footer {
   height: 150px;
@@ -80,7 +72,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 300px;
+  height: 500px;
 }
 
 .photos-list-item {
@@ -113,6 +105,7 @@
 .show-hotel {
   cursor: pointer;
   transition: all 0.2s;
+  
 }
 
 .show-hotel:hover {
@@ -121,10 +114,34 @@
 	box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.08);
 }
 
+
 .rotate-180{
   transform: rotate(180deg);
   justify-content: spa;
 }
+
+.user-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+}
+
+.footer{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.news{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: scroll;
+  height: calc(100vh - 380px);
+}
+
 
 @media (max-width: 525px) {
   .navbar .container {

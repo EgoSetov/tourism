@@ -7,11 +7,14 @@ const initialState = {
   createHotel: { visible: false, data: null },
   editHotel: { visible: false, data: null },
 
+  createNews: { visible: false, data: null },
+  editNews: { visible: false, data: null },
+
   createQuestion: { visible: false, data: null },
   editQuestion: { visible: false, data: null },
-  
+
   comments: { visible: false, data: null },
-  
+
   signin: { visible: false, data: null },
   signup: { visible: false, data: null },
 };

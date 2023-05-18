@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { showModal } from "../store/slices/modalsSlice";
 import { asyncDeleteUser, asyncGetUsers, asyncUpdateUser } from "../store/slices/userSlice";
 import { getFullPath } from "../utils/getFullPath";
-import noPhoto from "../assets/images/noPhoto.jpg";
+import noPhoto from "../assets/images/no-image.svg";
 
 const Profile = () => {
   const dispatch = useDispatch();

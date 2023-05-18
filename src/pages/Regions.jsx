@@ -40,14 +40,16 @@ const Regions = () => {
         )}
       </div>
       <hr />
-      {!!citys.length &&
-        !loading &&
-        citys.map((city) => (
-          <>
-            <CardCity key={city.id} city={city} getCitys={getCitys} />
-          </>
-        ))}
       {loading && <Spinner />}
+      <div className="news">
+        {!!citys.length &&
+          !loading &&
+          citys.map((city) => (
+            <>
+              <CardCity key={city.id} city={city} getCitys={getCitys} />
+            </>
+          ))}
+      </div>
     </>
   );
 };

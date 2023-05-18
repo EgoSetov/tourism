@@ -3,6 +3,8 @@ import { Button, Card, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../store/slices/modalsSlice";
 import { asyncDeleteQuestion, asyncGetQuestions } from "../store/slices/questionsSlice";
+import { getFullPath } from "../utils/getFullPath";
+import noPhoto from "../assets/images/no-image.svg";
 
 const Reviews = () => {
   const dispatch = useDispatch();
@@ -22,6 +24,13 @@ const Reviews = () => {
   const deleteQuestion = async (id) => {
     await dispatch(asyncDeleteQuestion(id));
     getQuestions();
+  };
+
+  const getAvatar = (question) => {
+    if (question?.creator?.avatar) {
+      return getFullPath({ uploads: question?.creator?.avatar });
+    }
+    return noPhoto;
   };
 
   useEffect(() => {
@@ -49,9 +58,12 @@ const Reviews = () => {
         {questions.map((question) => (
           <Card key={question.id}>
             <Card.Header className="d-flex justify-content-between">
-              <span>
-                Автор: {question.creator?.surname} {question.creator?.name}
-              </span>
+              <div className="d-flex align-items-center gap-2">
+                <div style={{ backgroundImage: `url(${getAvatar(question)})` }} className="user-avatar"></div>
+                <span>
+                  Автор: {question.creator?.surname} {question.creator?.name}
+                </span>
+              </div>
               <span>
                 Статус:{" "}
                 {question.status === "pending" ? (

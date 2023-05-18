@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncDeleteHotel } from "../store/slices/citysSlice";
 import { getFullPath } from "../utils/getFullPath";
-import noPhoto from "../assets/images/noPhoto.jpg";
+import noPhoto from "../assets/images/no-image.svg";
 import { showModal } from "../store/slices/modalsSlice";
 import { Button, Card } from "react-bootstrap";
 import Slider from "./Slider";

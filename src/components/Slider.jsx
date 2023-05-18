@@ -1,5 +1,5 @@
 import { Carousel } from "react-bootstrap";
-import noPhoto from "../assets/images/noPhoto.jpg";
+import noPhoto from "../assets/images/no-image.svg";
 
 function Slider({ photos }) {
   return (

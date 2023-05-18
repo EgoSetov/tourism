@@ -8,6 +8,7 @@ import { PATH_BUILD, PATH_UPLOADS } from "./utils/path.js";
 import citysRouter from "./routers/citys.router.js";
 import hotelsRouter from "./routers/hotels.router.js";
 import questionRouter from "./routers/questions.router.js";
+import newsRouter from "./routers/news.router.js";
 dotenv.config();
 
 const app = express();
@@ -20,6 +21,7 @@ app.use("/users", userRouter);
 app.use("/citys", citysRouter);
 app.use("/hotels", hotelsRouter);
 app.use("/questions", questionRouter);
+app.use("/news", newsRouter);
 
 app.use("/uploads", express.static(path.join(PATH_UPLOADS)));
 

@@ -36,6 +36,10 @@ const Header = () => {
       to: "/reviews",
       title: "Вопрос&Ответ",
     },
+    {
+      to: "/news",
+      title: "Новости",
+    },
   ];
 
   return (

@@ -5,9 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Regions from "./pages/Regions";
 import Home from "./pages/Home";
 import Payment from "./pages/Payment";
-import Contacts from "./pages/Contacts";
 import Reviews from "./pages/Reviews";
-import { NotificationContainer } from "react-notifications";
 import Footer from "./components/Footer";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,12 +13,14 @@ import ModalLogin from "./components/modals/ModalLogin";
 import ModalSignup from "./components/modals/ModalSignup";
 import { useEffect, useState } from "react";
 import { asyncConnect } from "./store/slices/userSlice";
+import ModalCreateNews from "./components/modals/ModalCreateNews";
 import ModalComments from "./components/modals/ModalComments";
 import ModalCreateCity from "./components/modals/ModalCreateCity";
 import ModalCreateHotel from "./components/modals/ModalCreateHotel";
 import ModalCreateQuestion from "./components/modals/ModalCreateQuestion";
 import Profile from "./pages/Profile";
 import { ToastContainer } from "react-toastify";
+import News from "./pages/News";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,18 +40,19 @@ function App() {
     }
   }, []);
   return (
-    <div id="container">
-      <div>
-        <Header />
-        <Container style={{ marginTop: "50px" }}>
+    <div>
+      <Header />
+      <div id="container">
+        <Container style={{ marginTop: "50px", maxHeight: "500px" }}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/news" element={<News />} />
             <Route path="/regions" element={<Regions />} />
             <Route path="/payment" element={<Payment />} />
-            {/* <Route path="/contacts" element={<Contacts />} /> */}
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/admin" element={<Profile />} />
+            {/* <Route path="/contacts" element={<Contacts />} /> */}
           </Routes>
         </Container>
       </div>
@@ -82,6 +83,9 @@ function App() {
 
       {modals.createQuestion.visible && <ModalCreateQuestion />}
       {modals.editQuestion.visible && <ModalCreateQuestion mode="edit" />}
+
+      {modals.createNews.visible && <ModalCreateNews />}
+      {modals.editNews.visible && <ModalCreateNews mode="edit" />}
 
       {loadin && (
         <div className="loadin">

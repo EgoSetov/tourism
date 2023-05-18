@@ -52,14 +52,16 @@ const Home = () => {
           </Button>
         )}
       </div>
-      {!!recommendationCitys.length &&
-        !loading &&
-        recommendationCitys.map((city) => (
-          <>
-            <CardCity key={city.id} city={city} getCitys={getCitys} />
-          </>
-        ))}
       {loading && <Spinner />}
+      <div className="news">
+        {!!recommendationCitys.length &&
+          !loading &&
+          recommendationCitys.map((city) => (
+            <>
+              <CardCity key={city.id} city={city} getCitys={getCitys} />
+            </>
+          ))}
+      </div>
     </>
   );
 };
